@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import sobaya.app.repository.model.User
 import sobaya.app.repository.model.UserDetail
 import sobaya.app.util.exception.NetworkException
+import sobaya.app.util.values.UserName
 
 interface GithubRepository {
     fun getUsers(
@@ -12,7 +13,7 @@ interface GithubRepository {
         onError: (e: NetworkException) -> Unit
     ): Flow<List<User>>
     fun getUSerDetail(
-        userName: String,
+        userName: UserName,
         onStart: () -> Unit,
         onComplete: () -> Unit,
         onError: (e: NetworkException) -> Unit

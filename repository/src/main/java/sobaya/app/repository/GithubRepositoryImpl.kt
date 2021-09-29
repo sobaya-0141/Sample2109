@@ -12,6 +12,7 @@ import sobaya.app.network.model.UsersResponseItem
 import sobaya.app.repository.model.User
 import sobaya.app.repository.model.UserDetail
 import sobaya.app.util.exception.NetworkException
+import sobaya.app.util.values.UserName
 
 class GithubRepositoryImpl @Inject constructor(
     private val githubDataSource: GithubDataSource
@@ -35,7 +36,7 @@ class GithubRepositoryImpl @Inject constructor(
     }
 
     override fun getUSerDetail(
-        userName: String,
+        userName: UserName,
         onStart: () -> Unit,
         onComplete: () -> Unit,
         onError: (e: NetworkException) -> Unit
