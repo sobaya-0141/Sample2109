@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sample2021.iml" filepath="$PROJECT_DIR$/.idea/modules/Sample2021.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Sample2021.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Sample2021.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/network/Sample2021.network.iml" filepath="$PROJECT_DIR$/.idea/modules/network/Sample2021.network.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repository/Sample2021.repository.iml" filepath="$PROJECT_DIR$/.idea/modules/repository/Sample2021.repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Sample2021.util.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Sample2021.util.iml" />
+    </modules>
+  </component>
+</project>
