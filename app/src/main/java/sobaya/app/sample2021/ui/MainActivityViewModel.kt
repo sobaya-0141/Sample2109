@@ -18,6 +18,9 @@ class MainActivityViewModel @Inject constructor(
         },
         onError = {
 
+        },
+        onStart = {
+
         }
     )
 

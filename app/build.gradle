@@ -3,8 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'kotlinx-serialization'
-    id 'kotlin-android-extensions'
 }
 
 android {
@@ -53,6 +51,7 @@ android {
 
 dependencies {
     implementation project(":network")
+    implementation project(":list")
     implementation project(":repository")
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
 
@@ -75,6 +74,4 @@ dependencies {
 
     implementation "com.squareup.okhttp3:okhttp:4.9.1"
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
-
-    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.0"
 }
