@@ -43,10 +43,6 @@ object ApiModule {
             .addConverterFactory(
                 Json {
                     ignoreUnknownKeys = true
-                    isLenient = true
-                    allowStructuredMapKeys = true
-                    prettyPrint = true
-                    coerceInputValues = true
                 }.asConverterFactory(
                     "application/json".toMediaType()
                 ),
