@@ -9,26 +9,4 @@ import kotlinx.coroutines.flow.onEach
 import sobaya.app.repository.GithubRepository
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(
-    private val githubRepository: GithubRepository
-): ViewModel() {
-    val test = githubRepository.getUsers(
-        onComplete = {
-
-        },
-        onError = {
-
-        },
-        onStart = {
-
-        }
-    )
-
-    fun test() {}
-
-    init {
-        this.test.onEach {
-            println(it[0].login)
-        }.launchIn(viewModelScope)
-    }
-}
+class MainActivityViewModel @Inject constructor(): ViewModel()

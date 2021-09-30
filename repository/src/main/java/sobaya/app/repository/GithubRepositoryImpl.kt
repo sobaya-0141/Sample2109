@@ -2,16 +2,14 @@ package sobaya.app.repository
 
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onCompletion
-import kotlinx.coroutines.flow.onStart
 import sobaya.app.network.data_source.GithubDataSource
 import sobaya.app.network.model.UserDetailResponse
 import sobaya.app.network.model.UsersResponseItem
 import sobaya.app.repository.model.User
 import sobaya.app.repository.model.UserDetail
 import sobaya.app.util.exception.NetworkException
+import sobaya.app.util.extensions.setEvent
 import sobaya.app.util.values.UserName
 
 class GithubRepositoryImpl @Inject constructor(
@@ -23,17 +21,7 @@ class GithubRepositoryImpl @Inject constructor(
         onError: (e: NetworkException) -> Unit
     ): Flow<List<User>> = flow {
         emit(githubDataSource.getUsers().toListUser())
-    }.catch {
-        if (it is NetworkException) {
-            onError(it)
-        } else {
-            throw it
-        }
-    }.onStart {
-        onStart()
-    }.onCompletion {
-        onComplete()
-    }
+    }.setEvent(onStart, onError, onComplete)
 
     override fun getUSerDetail(
         userName: UserName,
@@ -42,15 +30,7 @@ class GithubRepositoryImpl @Inject constructor(
         onError: (e: NetworkException) -> Unit
     ): Flow<UserDetail> = flow {
         emit(githubDataSource.getUserDetail(userName).toUserDetail())
-    }.onStart {
-        onStart()
-    }.catch {
-        if (it is NetworkException) {
-            onError(it)
-        } else {
-            throw it
-        }
-    }
+    }.setEvent(onStart, onError, onComplete)
 }
 
 fun List<UsersResponseItem>.toListUser(): List<User> {

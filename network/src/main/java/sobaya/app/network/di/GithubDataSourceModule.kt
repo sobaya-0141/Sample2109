@@ -1,6 +1,5 @@
 package sobaya.app.network.di
 
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,7 +9,7 @@ import sobaya.app.network.data_source.GithubDataSource
 import sobaya.app.network.data_source.GithubDataSourceImpl
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 class GithubDataSourceModule {
     @Provides
     fun provideGithubDataSource(githubDataSource: GithubDataSourceImpl): GithubDataSource {
