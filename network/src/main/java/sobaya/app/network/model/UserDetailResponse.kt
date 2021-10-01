@@ -9,5 +9,5 @@ data class UserDetailResponse(
     @SerialName("followers") val followers: Int,
     @SerialName("following") val following: Int,
     @SerialName("login") val login: String,
-    @SerialName("name") val name: String
+    @SerialName("name") val name: String?
 )
