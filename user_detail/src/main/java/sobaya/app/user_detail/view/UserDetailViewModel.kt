@@ -17,26 +17,26 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import sobaya.app.repository.GithubRepository
 import sobaya.app.repository.model.UserDetail
+import sobaya.app.usecase.GetUserDetailUseCase
 import sobaya.app.user_detail.view.UserDetailViewModel.UiState.Loading
 import sobaya.app.util.values.UserName
 
 @HiltViewModel
 class UserDetailViewModel @Inject constructor(
-    private val repository: GithubRepository
+    private val getUserDetailUseCase: GetUserDetailUseCase
 ) : ViewModel() {
     val uiState: MutableState<UiState> = mutableStateOf(Loading)
 
     fun getUserDetail(userName: UserName) {
         viewModelScope.launch {
-            val userDetail = repository.getUSerDetail(
+            getUserDetailUseCase(
                 userName = userName,
                 onStart = {},
                 onComplete = {},
                 onError = {
                     uiState.value = UiState.Failure(it.errorBody)
                 }
-            ).firstOrNull()
-            userDetail?.let {
+            ).collect {
                 uiState.value = UiState.Success(it)
             }
         }

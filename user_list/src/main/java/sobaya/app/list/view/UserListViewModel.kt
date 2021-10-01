@@ -6,28 +6,36 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import sobaya.app.repository.GithubRepository
 import sobaya.app.repository.model.User
+import sobaya.app.usecase.GetUserListUseCase
 
 @HiltViewModel
 class UserListViewModel @Inject constructor(
-    private val githubRepository: GithubRepository
+    private val getUserListUseCase: GetUserListUseCase
 ) : ViewModel() {
     val uiState: MutableState<UiState> = mutableStateOf(UiState.Loading)
-    private val users = githubRepository.getUsers(
-        onStart = {},
-        onComplete = {},
-        onError = {
-            uiState.value = UiState.Failure(it.errorBody)
-        }
-    )
 
     init {
-        users.onEach {
-            uiState.value = UiState.Success(it)
-        }.launchIn(viewModelScope)
+        getUserList()
+    }
+
+    private fun getUserList() {
+        viewModelScope.launch {
+            getUserListUseCase(
+                onStart = {},
+                onComplete = {},
+                onError = {
+                    uiState.value = UiState.Failure(it.errorBody)
+                }
+            ).collect {
+                uiState.value = UiState.Success(it)
+            }
+        }
     }
 
     sealed class UiState {

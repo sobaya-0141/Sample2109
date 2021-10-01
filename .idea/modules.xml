@@ -6,6 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Sample2021.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Sample2021.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/network/Sample2021.network.iml" filepath="$PROJECT_DIR$/.idea/modules/network/Sample2021.network.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/repository/Sample2021.repository.iml" filepath="$PROJECT_DIR$/.idea/modules/repository/Sample2021.repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/usecase/Sample2021.usecase.iml" filepath="$PROJECT_DIR$/.idea/modules/usecase/Sample2021.usecase.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/user_detail/Sample2021.user_detail.iml" filepath="$PROJECT_DIR$/.idea/modules/user_detail/Sample2021.user_detail.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/user_list/Sample2021.user_list.iml" filepath="$PROJECT_DIR$/.idea/modules/user_list/Sample2021.user_list.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/util/Sample2021.util.iml" filepath="$PROJECT_DIR$/.idea/modules/util/Sample2021.util.iml" />

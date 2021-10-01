@@ -204,6 +204,7 @@
     <orderEntry type="library" name="Gradle: com.google.dagger:dagger-lint-aar:2.38.1@aar" level="project" />
     <orderEntry type="module" module-name="Sample2021.repository" />
     <orderEntry type="module" module-name="Sample2021.network" />
+    <orderEntry type="module" module-name="Sample2021.usecase" />
     <orderEntry type="module" module-name="Sample2021.user_list" />
     <orderEntry type="module" module-name="Sample2021.user_detail" />
   </component>
