@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
@@ -16,10 +15,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Color.Companion
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
 import sobaya.app.composables.BoxTextField
@@ -39,10 +39,24 @@ fun UserListView(
             LoadingView()
         }
         is UserListViewModel.UiState.Success -> {
-            UserListSuccessView(users = uiState.requireUser(), navController = navController)
+//            UserListSuccessView(users = uiState.requireUser(), navController = navController)
+            SamplePagingList(viewModel)
         }
         is UserListViewModel.UiState.Failure -> {
             FailureView(error = uiState.requireError())
+        }
+    }
+}
+
+@Composable
+fun SamplePagingList(
+    viewModel: UserListViewModel
+) {
+    val lazyPagingItems = viewModel.samplePaging.flow.collectAsLazyPagingItems()
+
+    LazyColumn {
+        items(lazyPagingItems) { sample ->
+            Text(text = sample ?: "")
         }
     }
 }

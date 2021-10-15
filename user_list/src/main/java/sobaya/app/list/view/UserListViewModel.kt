@@ -4,14 +4,14 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import sobaya.app.repository.GithubRepository
 import sobaya.app.repository.model.User
+import sobaya.app.repository.paging.SamplePagingSource
 import sobaya.app.usecase.GetUserListUseCase
 
 @HiltViewModel
@@ -19,6 +19,11 @@ class UserListViewModel @Inject constructor(
     private val getUserListUseCase: GetUserListUseCase
 ) : ViewModel() {
     val uiState: MutableState<UiState> = mutableStateOf(UiState.Loading)
+    val samplePaging: Pager<Int, String> = Pager(
+        PagingConfig(pageSize = 10, initialLoadSize = 10)
+    ) {
+        SamplePagingSource()
+    }
 
     init {
         getUserList()
