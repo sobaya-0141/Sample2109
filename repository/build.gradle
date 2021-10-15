@@ -51,4 +51,8 @@ dependencies {
 
     testImplementation "io.mockk:mockk:1.11.0"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1"
+
+    def paging_version = "3.0.1"
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha14"
 }
