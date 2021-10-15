@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sample2021.iml" filepath="$PROJECT_DIR$/.idea/modules/Sample2021.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Sample2021.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Sample2021.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composables/Sample2021.composables.iml" filepath="$PROJECT_DIR$/.idea/modules/composables/Sample2021.composables.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/network/Sample2021.network.iml" filepath="$PROJECT_DIR$/.idea/modules/network/Sample2021.network.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/repository/Sample2021.repository.iml" filepath="$PROJECT_DIR$/.idea/modules/repository/Sample2021.repository.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/usecase/Sample2021.usecase.iml" filepath="$PROJECT_DIR$/.idea/modules/usecase/Sample2021.usecase.iml" />
