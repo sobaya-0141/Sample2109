@@ -52,7 +52,7 @@ fun UserListView(
 fun SamplePagingList(
     viewModel: UserListViewModel
 ) {
-    val lazyPagingItems = viewModel.samplePaging.flow.collectAsLazyPagingItems()
+    val lazyPagingItems = viewModel.samplePagingFlow.collectAsLazyPagingItems()
 
     LazyColumn {
         items(lazyPagingItems) { sample ->
