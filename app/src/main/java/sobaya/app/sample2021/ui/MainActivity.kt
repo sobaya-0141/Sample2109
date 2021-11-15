@@ -12,7 +12,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import dagger.hilt.android.AndroidEntryPoint
-import sobaya.app.list.view.UserListView
 import sobaya.app.sample2021.ui.theme.Sample2021Theme
 import sobaya.app.user_detail.view.UserDetailView
 
@@ -22,11 +21,16 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+
             val navController = rememberNavController()
             Sample2021Theme {
                 Surface(color = MaterialTheme.colors.background) {
+                    DestinationsNavHost(
+                        navController = rememberNavController()
+                    )
+
                     NavHost(navController = navController, startDestination = "userList") {
-                        composable("userList") { UserListView(navController, hiltViewModel()) }
+                        composable("userList") {  }
                         composable(
                             "userDetail/{userName}",
                             arguments = listOf(

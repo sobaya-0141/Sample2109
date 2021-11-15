@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.devtools.ksp' version '1.5.31-1.0.0'
 }
 
 android {
@@ -73,4 +74,7 @@ dependencies {
     def paging_version = "3.0.0-alpha07"
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
     implementation "androidx.paging:paging-compose:1.0.0-alpha14"
+
+    implementation 'io.github.raamcosta.compose-destinations:core:0.9.4-beta'
+    ksp 'io.github.raamcosta.compose-destinations:ksp:0.9.4-beta'
 }

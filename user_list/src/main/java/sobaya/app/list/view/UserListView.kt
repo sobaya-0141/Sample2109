@@ -22,14 +22,17 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import coil.compose.rememberImagePainter
 import coil.transform.CircleCropTransformation
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import sobaya.app.composables.BoxTextField
 import sobaya.app.repository.model.User
 import sobaya.app.util.composable.FailureView
 import sobaya.app.util.composable.LoadingView
 
+@Destination(start = true)
 @Composable
 fun UserListView(
-    navController: NavController,
+    navController: DestinationsNavigator,
     viewModel: UserListViewModel
 ) {
     val uiState: UserListViewModel.UiState by viewModel.uiState
