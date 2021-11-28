@@ -18,8 +18,6 @@ class WasabiProcessor(
 ) : SymbolProcessor {
 
     private var invoked = false
-    private val debugMode = false
-    private val debug = ArrayList<String>()
 
     private fun getViewModels(resolver: Resolver): List<Pair<String, String>> {
         val viewModels = ArrayList<Pair<String, String>>()
@@ -36,8 +34,6 @@ class WasabiProcessor(
                 }
             }
         }
-
-        debug.addAll(stateMap.keys.map { it })
 
         viewModelSymbol.filterIsInstance<KSClassDeclaration>().forEach { classDeclare ->
             val key = stateMap.keys.find { it.contains(classDeclare.packageName.asString() + "." + classDeclare.simpleName.getShortName()) }
@@ -102,11 +98,7 @@ class WasabiProcessor(
             "StateExtensions"
         )
 
-        if (!debugMode) {
-            file.write(functions.joinToString("\n").toByteArray())
-        } else {
-            file.write(debug.joinToString("\n").toByteArray())
-        }
+        file.write(functions.joinToString("\n").toByteArray())
         file.close()
 
         invoked = true
