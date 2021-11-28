@@ -16,11 +16,15 @@ import kotlinx.coroutines.launch
 import sobaya.app.repository.model.User
 import sobaya.app.repository.paging.SamplePagingSource
 import sobaya.app.usecase.GetUserListUseCase
+import sobaya.lib.wasabi.WasabiState
 
 @HiltViewModel
+@sobaya.lib.wasabi.WasabiViewModel(ListData::class)
 class UserListViewModel @Inject constructor(
     private val getUserListUseCase: GetUserListUseCase
 ) : ViewModel() {
+    @WasabiState
+    val listState = mutableStateOf(ListData(""))
     val uiState: MutableState<UiState> = mutableStateOf(UiState.Loading)
     val samplePagingFlow: Flow<PagingData<String>> = Pager(
         PagingConfig(pageSize = 10, initialLoadSize = 10)
@@ -52,3 +56,7 @@ class UserListViewModel @Inject constructor(
         data class Failure(val error: String) : UiState()
     }
 }
+
+data class ListData(
+    val test: String
+)

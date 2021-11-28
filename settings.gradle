@@ -5,6 +5,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
 rootProject.name = "Sample2021"
 include ':app'
 include ':repository'
@@ -14,3 +15,4 @@ include ':user_list'
 include ':user_detail'
 include ':usecase'
 include ':composables'
+include ':Wasabi'
