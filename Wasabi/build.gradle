@@ -1,9 +1,25 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
     id "com.google.devtools.ksp" version "1.5.31-1.0.0"
+
+    id 'maven-publish'
 }
+
+group = 'com.github.sobaya-0141'
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "com.google.devtools.ksp:symbol-processing-api:1.5.31-1.0.0"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = 'com.github.sobaya-0141'
+                artifactId = 'Sample2109'
+                version = '0.1.0'
+            }
+        }
+    }
 }
