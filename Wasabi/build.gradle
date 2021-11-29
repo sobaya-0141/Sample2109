@@ -18,7 +18,7 @@ afterEvaluate {
             release(MavenPublication) {
                 groupId = 'com.github.sobaya-0141'
                 artifactId = 'Sample2109'
-                version = '0.1.0'
+                version = '0.1.1'
             }
         }
     }
