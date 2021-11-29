@@ -19,8 +19,8 @@ class WasabiProcessor(
 
     private var invoked = false
 
-    private fun getViewModels(resolver: Resolver): List<Pair<String, String>> {
-        val viewModels = ArrayList<Pair<String, String>>()
+    private fun getViewModels(resolver: Resolver): List<WasabiViewModelInfo> {
+        val viewModels = ArrayList<WasabiViewModelInfo>()
         val viewModelSymbol = resolver.getSymbolsWithAnnotation("sobaya.lib.wasabi.WasabiViewModel")
         val stateMap = HashMap<String, String>()
         viewModelSymbol.iterator().forEach {
@@ -39,15 +39,15 @@ class WasabiProcessor(
             val key = stateMap.keys.find { it.contains(classDeclare.packageName.asString() + "." + classDeclare.simpleName.getShortName()) }
             if (key?.isNotEmpty() == true) {
                 val state = stateMap[key] ?: ""
-                viewModels.add(("${classDeclare.packageName.asString()}.${classDeclare.simpleName.getShortName()}" to state))
+                viewModels.add(WasabiViewModelInfo("${classDeclare.packageName.asString()}.${classDeclare.simpleName.getShortName()}", state))
             }
         }
 
         return viewModels
     }
 
-    private fun getStates(resolver: Resolver): List<Pair<String, String>> {
-        val states = ArrayList<Pair<String, String>>()
+    private fun getStates(resolver: Resolver): List<WasabiStateInfo> {
+        val states = ArrayList<WasabiStateInfo>()
         val stateSymbol = resolver.getSymbolsWithAnnotation("sobaya.lib.wasabi.WasabiState")
 
         stateSymbol.filterIsInstance<KSPropertyDeclaration>().forEach { it ->
@@ -55,7 +55,7 @@ class WasabiProcessor(
                 val filePath = (it.parent?.location as FileLocation).filePath
                 val file = File(filePath)
                 val fieldName = it.parent.toString()
-                states.add(file.path.replace("/", ".") to fieldName)
+                states.add(WasabiStateInfo(file.path.replace("/", "."), fieldName))
             }
         }
 
@@ -74,7 +74,6 @@ class WasabiProcessor(
             return emptyList()
         }
 
-        val functions = ArrayList<String>()
         val viewModels = getViewModels(resolver)
         val states = getStates(resolver)
 
@@ -83,26 +82,32 @@ class WasabiProcessor(
             return emptyList()
         }
 
-        functions.add("package sobaya.wasabi.${viewModels[0].first}")
         states.forEach { (viewModelPath, fieldName) ->
             viewModels.forEach {
-                if (viewModelPath.contains(it.first)) {
-                    functions.add(makeFunction(it.first, fieldName, it.second))
+                if (viewModelPath.contains(it.classPath)) {
+                    writeFile(makeFunction(it.classPath, fieldName, it.state), it.classPath)
                 }
             }
         }
 
+        invoked = true
+        return emptyList()
+    }
+
+    private fun writeFile(functionString: String, viewModelPath: String) {
+        val functions = ArrayList<String>()
+
+        functions.add("package sobaya.wasabi.${viewModelPath}")
+        functions.add(functionString)
+
         val file = codeGenerator.createNewFile(
             Dependencies(false),
-            "sobaya.wasabi.${viewModels[0].first}",
+            "sobaya.wasabi.${viewModelPath}",
             "StateExtensions"
         )
 
         file.write(functions.joinToString("\n").toByteArray())
         file.close()
-
-        invoked = true
-        return emptyList()
     }
 
     override fun onError() {
@@ -110,3 +115,13 @@ class WasabiProcessor(
         logger.warn("ERROR")
     }
 }
+
+data class WasabiViewModelInfo(
+    val classPath: String,
+    val state: String
+)
+
+data class WasabiStateInfo(
+    val path: String,
+    val fieldName: String
+)

@@ -39,8 +39,8 @@ fun UserListView(
             LoadingView()
         }
         is UserListViewModel.UiState.Success -> {
-//            UserListSuccessView(users = uiState.requireUser(), navController = navController)
-            SamplePagingList(viewModel)
+            UserListSuccessView(users = uiState.requireUser(), navController = navController)
+//            SamplePagingList(viewModel)
         }
         is UserListViewModel.UiState.Failure -> {
             FailureView(error = uiState.requireError())

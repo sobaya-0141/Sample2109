@@ -19,7 +19,10 @@ class UserDetailViewModel @Inject constructor(
     val testFieldName: MutableState<TestDataClass> = mutableStateOf(TestDataClass(""))
 
     init {
-        setState { it.copy("test") }
+        setState {
+            it.copy(test = "TEST")
+        }
+        print(testFieldName.value)
     }
 
 //    fun getUserDetail(userName: UserName) {
