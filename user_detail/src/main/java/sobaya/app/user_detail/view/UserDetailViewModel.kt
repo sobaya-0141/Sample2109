@@ -8,8 +8,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import sobaya.app.repository.model.UserDetail
 import sobaya.app.usecase.GetUserDetailUseCase
+import sobaya.app.user_detail.model.UserDetail
 import sobaya.app.util.values.UserName
 import sobaya.lib.wasabi.WasabiState
 import sobaya.wasabi.sobaya.app.user_detail.view.UserDetailViewModel.setState
@@ -39,7 +39,7 @@ class UserDetailViewModel @Inject constructor(
             ).collect { detail ->
                 setState {
                     it.copy(
-                        userDetail = detail
+                        userDetail = UserDetail.fromUserDetail(detail)
                     )
                 }
             }
