@@ -3,8 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-
-    id "com.google.devtools.ksp" version "1.5.31-1.0.0"
 }
 
 android {
@@ -44,17 +42,6 @@ android {
         kotlinCompilerExtensionVersion compose_version
         kotlinCompilerVersion '1.5.21'
     }
-    packagingOptions {
-        resources {
-            excludes += '/META-INF/{AL2.0,LGPL2.1}'
-        }
-    }
-}
-
-sourceSets {
-    main {
-        java.srcDir(file("build/generated/ksp/debug/kotlin"))
-    }
 }
 
 dependencies {
@@ -90,8 +77,4 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
 
     implementation("com.google.devtools.ksp:symbol-processing-api:1.5.31-1.0.0")
-    implementation project(':Wasabi')
-    ksp project(":Wasabi")
 }
-
-apply plugin: 'com.google.devtools.ksp'

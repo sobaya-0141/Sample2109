@@ -1,6 +1,5 @@
 package sobaya.app.list.view
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,15 +16,15 @@ import sobaya.app.repository.model.User
 import sobaya.app.repository.paging.SamplePagingSource
 import sobaya.app.usecase.GetUserListUseCase
 import sobaya.lib.wasabi.WasabiState
+import sobaya.wasabi.sobaya.app.list.view.UserListViewModel.setState
 
 @HiltViewModel
-@sobaya.lib.wasabi.WasabiViewModel(ListData::class)
+@sobaya.lib.wasabi.WasabiViewModel(UserListState::class)
 class UserListViewModel @Inject constructor(
     private val getUserListUseCase: GetUserListUseCase
 ) : ViewModel() {
     @WasabiState
-    val listState = mutableStateOf(ListData(""))
-    val uiState: MutableState<UiState> = mutableStateOf(UiState.Loading)
+    val uiState = mutableStateOf(UserListState())
     val samplePagingFlow: Flow<PagingData<String>> = Pager(
         PagingConfig(pageSize = 10, initialLoadSize = 10)
     ) {
@@ -41,22 +40,25 @@ class UserListViewModel @Inject constructor(
             getUserListUseCase(
                 onStart = {},
                 onComplete = {},
-                onError = {
-                    uiState.value = UiState.Failure(it.errorBody)
+                onError = { error ->
+                    setState {
+                        it.copy(error = error.errorBody)
+                    }
                 }
-            ).collect {
-                uiState.value = UiState.Success(it)
+            ).collect { users ->
+                setState {
+                    it.copy(
+                        users = users
+                    )
+                }
             }
         }
     }
-
-    sealed class UiState {
-        object Loading : UiState()
-        data class Success(val users: List<User>) : UiState()
-        data class Failure(val error: String) : UiState()
-    }
 }
 
-data class ListData(
-    val test: String
-)
+data class UserListState(
+    val users: List<User>? = null,
+    val error: String? = null
+) {
+    val isLoading = users == null && error == null
+}

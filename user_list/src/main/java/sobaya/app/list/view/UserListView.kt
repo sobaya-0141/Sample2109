@@ -11,7 +11,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,18 +31,18 @@ fun UserListView(
     navController: NavController,
     viewModel: UserListViewModel
 ) {
-    val uiState: UserListViewModel.UiState by viewModel.uiState
+    val state = viewModel.uiState.value
 
-    when (uiState) {
-        is UserListViewModel.UiState.Loading -> {
+    when {
+        state.isLoading -> {
             LoadingView()
         }
-        is UserListViewModel.UiState.Success -> {
-            UserListSuccessView(users = uiState.requireUser(), navController = navController)
+        state.users != null -> {
+            UserListSuccessView(users = state.users, navController = navController)
 //            SamplePagingList(viewModel)
         }
-        is UserListViewModel.UiState.Failure -> {
-            FailureView(error = uiState.requireError())
+        state.error != null -> {
+            FailureView(error = state.error)
         }
     }
 }
@@ -102,12 +101,4 @@ fun UserListSuccessView(
             BoxTextField(state = mutableStateOf(TextFieldValue()))
         }
     }
-}
-
-private fun UserListViewModel.UiState.requireUser(): List<User> {
-    return (this as UserListViewModel.UiState.Success).users
-}
-
-private fun UserListViewModel.UiState.requireError(): String{
-    return (this as UserListViewModel.UiState.Failure).error
 }
