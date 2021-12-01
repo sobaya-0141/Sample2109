@@ -14,7 +14,6 @@ import sobaya.app.util.values.UserName
 import sobaya.lib.wasabi.WasabiState
 import sobaya.wasabi.sobaya.app.user_detail.view.UserDetailViewModel.setState
 
-
 @HiltViewModel
 @sobaya.lib.wasabi.WasabiViewModel(UserDetailState::class)
 class UserDetailViewModel @Inject constructor(

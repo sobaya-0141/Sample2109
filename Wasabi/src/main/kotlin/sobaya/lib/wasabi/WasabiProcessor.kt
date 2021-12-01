@@ -74,6 +74,7 @@ class WasabiProcessor(
             return emptyList()
         }
 
+        logger.warn("START")
         val viewModels = getViewModels(resolver)
         val states = getStates(resolver)
 
@@ -89,6 +90,8 @@ class WasabiProcessor(
                 }
             }
         }
+
+        logger.warn("FINISH")
 
         invoked = true
         return emptyList()

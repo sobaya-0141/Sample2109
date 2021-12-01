@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="circle_image_size">64dp</dimen>
+    <dimen name="card_list_elevation">10dp</dimen>
+    <dimen name="card_list_bottom_padding">8dp</dimen>
+    <dimen name="list_row_padding">8dp</dimen>
+</resources>
