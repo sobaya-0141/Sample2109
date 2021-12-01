@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import coil.compose.rememberImagePainter
@@ -42,8 +41,8 @@ fun UserListView(
             LoadingView()
         }
         is UserListViewModel.UiState.Success -> {
-//            UserListSuccessView(users = uiState.requireUser(), navController = navController)
-            SamplePagingList(viewModel)
+            UserListSuccessView(users = uiState.requireUser(), navController = navController)
+//            SamplePagingList(viewModel)
         }
         is UserListViewModel.UiState.Failure -> {
             FailureView(error = uiState.requireError())
@@ -66,7 +65,7 @@ fun SamplePagingList(
 
 @Composable
 fun UserListSuccessView(
-    navController: NavController,
+    navController: DestinationsNavigator,
     users: List<User>
 ) {
     LazyColumn {

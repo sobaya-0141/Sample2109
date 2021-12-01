@@ -42,6 +42,15 @@ android {
     }
 }
 
+kotlin {
+    sourceSets.debug {
+        kotlin.srcDir("build/generated/ksp/debug/kotlin")
+    }
+    sourceSets.release {
+        kotlin.srcDir("build/generated/ksp/release/kotlin")
+    }
+}
+
 dependencies {
 
     implementation project(":repository")
