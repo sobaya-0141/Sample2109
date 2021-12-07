@@ -5,23 +5,23 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import sobaya.app.usecase.GetUserDetailUseCase
-import sobaya.app.usecase.GetUserDetailUseCaseImple
+import sobaya.app.usecase.GetUserDetailUseCaseImpl
 import sobaya.app.usecase.GetUserListUseCase
-import sobaya.app.usecase.GetUserListUseCaseImple
+import sobaya.app.usecase.GetUserListUseCaseImpl
 
 @Module
 @InstallIn(ViewModelComponent::class)
 class UseCaseModule {
     @Provides
     fun provideGetUserDetailUseCase(
-        getUserDetailUseCase: GetUserDetailUseCaseImple
+        getUserDetailUseCase: GetUserDetailUseCaseImpl
     ): GetUserDetailUseCase {
         return getUserDetailUseCase
     }
 
     @Provides
     fun provideGetUserListUseCase(
-        getUserListUseCase: GetUserListUseCaseImple
+        getUserListUseCase: GetUserListUseCaseImpl
     ): GetUserListUseCase {
         return getUserListUseCase
     }

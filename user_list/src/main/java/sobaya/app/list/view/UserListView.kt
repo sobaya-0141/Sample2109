@@ -27,7 +27,6 @@ fun UserListView(
         }
         state.users != null -> {
             UserListSuccessView(users = state.users, navController = navController)
-//            SamplePagingList(viewModel)
         }
         state.error != null -> {
             FailureView(error = state.error)

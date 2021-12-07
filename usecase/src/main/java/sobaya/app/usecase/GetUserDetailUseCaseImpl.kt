@@ -3,17 +3,18 @@ package sobaya.app.usecase
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import sobaya.app.repository.GithubRepository
-import sobaya.app.repository.model.User
+import sobaya.app.repository.model.UserDetail
 import sobaya.app.util.exception.NetworkException
+import sobaya.app.util.values.UserName
 
-class GetUserListUseCaseImple @Inject constructor(
+class GetUserDetailUseCaseImpl @Inject constructor(
     private val repository: GithubRepository
-) : GetUserListUseCase {
-    override suspend fun invoke(
+) : GetUserDetailUseCase {
+    override suspend operator fun invoke(
+        userName: UserName,
         onStart: () -> Unit,
         onComplete: () -> Unit,
         onError: (e: NetworkException) -> Unit
-    ): Flow<List<User>> {
-        return repository.getUsers(onStart, onComplete, onError)
-    }
+    ): Flow<UserDetail> =
+        repository.getUSerDetail(userName, onStart, onComplete, onError)
 }

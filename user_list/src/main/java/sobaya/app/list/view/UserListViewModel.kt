@@ -1,5 +1,6 @@
 package sobaya.app.list.view
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -25,11 +26,6 @@ class UserListViewModel @Inject constructor(
 ) : ViewModel() {
     @WasabiState
     val uiState = mutableStateOf(UserListState())
-    val samplePagingFlow: Flow<PagingData<String>> = Pager(
-        PagingConfig(pageSize = 10, initialLoadSize = 10)
-    ) {
-        SamplePagingSource()
-    }.flow.cachedIn(viewModelScope)
 
     init {
         getUserList()
