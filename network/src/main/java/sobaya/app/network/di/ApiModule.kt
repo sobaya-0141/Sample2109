@@ -9,7 +9,6 @@ import javax.inject.Singleton
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import sobaya.app.network.service.GithubService
 
@@ -26,10 +25,6 @@ object ApiModule {
     @Provides
     fun provideOkHttp(): OkHttpClient {
         val builder = OkHttpClient.Builder()
-        val logging = HttpLoggingInterceptor()
-
-        logging.level = if (true) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
-        builder.addInterceptor(logging)
 
         return builder.build()
     }

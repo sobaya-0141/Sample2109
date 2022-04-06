@@ -39,7 +39,12 @@ class WasabiProcessor(
             val key = stateMap.keys.find { it.contains(classDeclare.packageName.asString() + "." + classDeclare.simpleName.getShortName()) }
             if (key?.isNotEmpty() == true) {
                 val state = stateMap[key] ?: ""
-                viewModels.add(WasabiViewModelInfo("${classDeclare.packageName.asString()}.${classDeclare.simpleName.getShortName()}", state))
+                viewModels.add(
+                    WasabiViewModelInfo(
+                        "${classDeclare.packageName.asString()}.${classDeclare.simpleName.getShortName()}",
+                        state
+                    )
+                )
             }
         }
 
@@ -55,7 +60,11 @@ class WasabiProcessor(
                 val filePath = (it.parent?.location as FileLocation).filePath
                 val file = File(filePath)
                 val fieldName = it.parent.toString()
-                states.add(WasabiStateInfo(file.path.replace("/", "."), fieldName))
+                states.add(
+                    WasabiStateInfo(
+                        file.path.replace("/", "."), fieldName
+                    )
+                )
             }
         }
 

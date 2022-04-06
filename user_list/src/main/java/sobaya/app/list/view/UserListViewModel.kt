@@ -1,6 +1,5 @@
 package sobaya.app.list.view
 
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,16 +15,17 @@ import kotlinx.coroutines.launch
 import sobaya.app.repository.model.User
 import sobaya.app.repository.paging.SamplePagingSource
 import sobaya.app.usecase.GetUserListUseCase
-import sobaya.lib.wasabi.WasabiState
-import sobaya.wasabi.sobaya.app.list.view.UserListViewModel.setState
 
 @HiltViewModel
-@sobaya.lib.wasabi.WasabiViewModel(UserListState::class)
 class UserListViewModel @Inject constructor(
     private val getUserListUseCase: GetUserListUseCase
 ) : ViewModel() {
-    @WasabiState
     val uiState = mutableStateOf(UserListState())
+    val samplePagingFlow: Flow<PagingData<String>> = Pager(
+        PagingConfig(pageSize = 10, initialLoadSize = 10)
+    ) {
+        SamplePagingSource()
+    }.flow.cachedIn(viewModelScope)
 
     init {
         getUserList()
@@ -37,16 +37,14 @@ class UserListViewModel @Inject constructor(
                 onStart = {},
                 onComplete = {},
                 onError = { error ->
-                    setState {
-                        it.copy(error = error.errorBody)
-                    }
-                }
-            ).collect { users ->
-                setState {
-                    it.copy(
-                        users = users
+                    uiState.value = uiState.value.copy(
+                        error = error.errorBody
                     )
                 }
+            ).collect { users ->
+                uiState.value = uiState.value.copy(
+                    users = users
+                )
             }
         }
     }
