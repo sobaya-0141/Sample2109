@@ -1,8 +1,105 @@
+enableFeaturePreview('VERSION_CATALOGS')
+
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+
+    versionCatalogs {
+        libs {
+            version("coroutine", "1.5.1")
+            alias("kotlinx-coroutines-android").to("org.jetbrains.kotlinx", "kotlinx-coroutines-android").versionRef("coroutine")
+
+            version("core", "1.6.0")
+            alias("core-ktx").to("androidx.core", "core-ktx").versionRef("core")
+
+            version("appcompat", "1.4.0")
+            alias("appcompat").to("androidx.appcompat", "appcompat").versionRef("appcompat")
+
+            version("material", "1.4.0")
+            alias("material").to("com.google.android.material", "material").versionRef("material")
+
+            version("paging", "3.1.1")
+            alias("paging").to("androidx.paging", "paging-runtime").versionRef("paging")
+            version("paging-compose", "1.0.0-alpha14")
+            alias("paging-compose").to("androidx.paging", "paging-compose").versionRef("paging-compose")
+            bundle("paging", ["paging", "paging-compose"])
+
+            version("compose", "1.1.0-beta03")
+            alias("compose-animation").to("androidx.compose.animation", "animation").versionRef("compose")
+            alias("compose-ui").to("androidx.compose.ui", "ui").versionRef("compose")
+            alias("compose-material").to("androidx.compose.material", "material").versionRef("compose")
+            alias("compose-ui-tooling-preview").to("androidx.compose.ui", "ui-tooling-preview").versionRef("compose")
+            alias("compose-foundation").to("androidx.compose.foundation", "foundation").versionRef("compose")
+            alias("compose-foundation-layout").to("androidx.compose.foundation", "foundation-layout").versionRef("compose")
+            alias("compose-runtime").to("androidx.compose.runtime", "runtime").versionRef("compose")
+            alias("compose-runtime-livedata").to("androidx.compose.runtime", "runtime-livedata").versionRef("compose")
+            alias("compoase-material-icons-extended").to("androidx.compose.material", "material-icons-extended").versionRef("compose")
+
+            version("compose-constraint", "1.0.0-beta02")
+            alias("constraintlayout-compose").to("androidx.constraintlayout", "constraintlayout-compose").versionRef("compose-constraint")
+
+            version("activity-compose", "1.4.0")
+            alias("activity-compose").to("androidx.activity", "activity-compose").versionRef("activity-compose")
+
+            version("coil_version", "2.0.0-rc01")
+            alias("coil_compose").to("io.coil-kt", "coil-compose").versionRef("coil_version")
+            alias("coil-gif").to("io.coil-kt", "coil-gif").versionRef("coil_version")
+
+            version("accompanist", "0.23.1")
+            alias("accompanist-permissions").to("com.google.accompanist", "accompanist-permissions").versionRef("accompanist")
+
+            bundle("compose", ["compose-ui", "compose-material", "compose-ui-tooling-preview", "compose-foundation-layout", "compoase-material-icons-extended", "activity-compose", "constraintlayout-compose", "coil_compose", "coil-gif", "accompanist-permissions"])
+
+            version("lifecycle", "2.4.1")
+            alias("lifecycle-runtime-ktx").to("androidx.lifecycle", "lifecycle-runtime-ktx").versionRef("lifecycle")
+            alias("lifecycle-viewmodel-ktx").to("androidx.lifecycle", "lifecycle-viewmodel-ktx").versionRef("lifecycle")
+            alias("lifecycle-viewmodel-compose").to("androidx.lifecycle", "lifecycle-viewmodel-compose").versionRef("lifecycle")
+            bundle("lifecycle", ["lifecycle-runtime-ktx", "lifecycle-viewmodel-ktx", "lifecycle-viewmodel-compose"])
+
+            version("junit", "4.13.2")
+            alias("junit").to("junit", "junit").versionRef("junit")
+
+            version("androidx-junit", "1.1.3")
+            alias("androidx-junit").to("androidx.test.ext", "junit").versionRef("androidx-junit")
+
+            version("espresso-core", "3.4.0")
+            alias("espresso-core").to("androidx.test.espresso", "espresso-core").versionRef("espresso-core")
+
+            alias("ui-test-junit4").to("androidx.compose.ui", "ui-test-junit4").versionRef("compose")
+            bundle("android-test", ["androidx-junit", "espresso-core", "ui-test-junit4"])
+
+            alias("ui-tooling").to("androidx.compose.ui", "ui-tooling").versionRef("compose")
+
+            version("hilt", "2.38.1")
+            alias("hilt-android").to("com.google.dagger", "hilt-android").versionRef("hilt")
+            alias("hilt-compiler").to("com.google.dagger", "hilt-compiler").versionRef("hilt")
+
+            version("okhttp", "4.9.1")
+            alias("okhttp").to("com.squareup.okhttp3", "okhttp").versionRef("okhttp")
+            version("retrofit", "2.9.0")
+            alias("retrofit").to("com.squareup.retrofit2", "retrofit").versionRef("retrofit")
+            version("kotlinx-serialization-json", "1.2.0")
+            alias("kotlinx-serialization-json").to("org.jetbrains.kotlinx", "kotlinx-serialization-json").versionRef("kotlinx-serialization-json")
+            version("retrofit2-kotlinx-serialization-converter", "0.8.0")
+            alias("retrofit2-kotlinx-serialization-converter").to("com.jakewharton.retrofit", "retrofit2-kotlinx-serialization-converter").versionRef("retrofit2-kotlinx-serialization-converter")
+            bundle("retrofit-bundle", ["okhttp", "retrofit", "kotlinx-serialization-json", "retrofit2-kotlinx-serialization-converter"])
+
+            version("navigation-compose", "2.4.1")
+            alias("navigation-compose").to("androidx.navigation", "navigation-compose").versionRef("navigation-compose")
+            version("hilt-navigation-compose", "1.0.0-rc01")
+            alias("hilt-navigation-compose").to("androidx.hilt", "hilt-navigation-compose").versionRef("hilt-navigation-compose")
+            bundle("compose-navigastion", ["navigation-compose", "hilt-navigation-compose"])
+
+            version("room", "2.4.1")
+            alias("room-ktx").to("androidx.room", "room-ktx").versionRef("room")
+            alias("room-runtime").to("androidx.room", "room-runtime").versionRef("room")
+            alias("room-compiler").to("androidx.room", "room-compiler").versionRef("room")
+            bundle("room", ["room-ktx", "room-runtime"])
+        }
     }
 }
 

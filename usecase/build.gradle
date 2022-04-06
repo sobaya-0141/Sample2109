@@ -34,18 +34,26 @@ android {
 }
 
 dependencies {
-
     implementation project(":repository")
     implementation project(":util")
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation libs.kotlinx.coroutines.android
 
-    implementation "com.google.dagger:hilt-android:2.38.1"
-    kapt "com.google.dagger:hilt-compiler:2.38.1"
+    implementation libs.core.ktx
+    implementation libs.appcompat
+    implementation libs.bundles.compose
+    implementation libs.lifecycle.runtime.ktx
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.1"
+    testImplementation libs.junit
+
+    androidTestImplementation libs.bundles.android.test
+
+    debugImplementation libs.ui.tooling
+
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
+
+    implementation libs.bundles.retrofit.bundle
+    implementation libs.bundles.compose.navigastion
+
+    implementation libs.bundles.lifecycle
 }
