@@ -3,10 +3,11 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'app.cash.paparazzi'
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         minSdk 21
