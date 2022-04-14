@@ -1,21 +1,12 @@
 package sobaya.app.list
 
-import androidx.compose.material.Text
-import androidx.navigation.compose.rememberNavController
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.cash.paparazzi.DeviceConfig
-import app.cash.paparazzi.DeviceConfig.Companion
 import app.cash.paparazzi.Paparazzi
-
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
-import org.junit.Rule
 import sobaya.app.composables.lv3_organisms.ListCard
-import sobaya.app.list.view.UserListSuccessView
-import sobaya.app.repository.model.User
 
 /**
  * Instrumented test, which will execute on an Android device.
